@@ -1,6 +1,10 @@
 provider "aws" {
   profile = var.profile
   region  = var.region
+  assume_role {
+    role_arn     = var.role_arn
+    session_name = "terraform"
+  }
 }
 
 terraform {
@@ -10,6 +14,10 @@ terraform {
 module "vpc" {
   source = "../modules/vpc"
 }
+
+/*module "iam" {
+  source = "../modules/iam"
+}*/
 
 module "public_subnet" {
   source = "../modules/public-subnet"
@@ -40,3 +48,53 @@ module "ec2" {
   ec2_ssh_key_name        = var.ec2_ssh_key_name
   ec2_ssh_public_key_path = var.ec2_ssh_public_key_path
 }
+/*
+
+resource "aws_iam_role" "terraform_role" {
+  name = "TerraformRole"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        },
+        Action = "sts:AssumeRole"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "example-attach" {
+  role       = aws_iam_role.terraform_role.id
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
+
+resource "aws_iam_role" "example_role" {
+  name = "example"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Principal = {
+          AWS = "arn:aws:iam::351840223119:role/TerraformRole"
+        },
+        Action = "sts:AssumeRole"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "example_role_admin" {
+  role       = aws_iam_role.example_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
+
+output "role_arn" {
+  description = "The ARN of the IAM role"
+  value       = aws_iam_role.terraform_role.arn
+}*/

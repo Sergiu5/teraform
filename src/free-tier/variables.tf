@@ -21,3 +21,8 @@ variable "ec2_ssh_public_key_path" {
   type        = string
   default     = "./provision/access/free-tier-ec2-key.pub"
 }
+
+variable "role_arn" {
+  description = "The ARN of the role to assume"
+  default     = "arn:aws:iam::351840223119:role/TerraformRole"
+}
