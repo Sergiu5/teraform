@@ -34,11 +34,14 @@ jobs:
       run: cd src/free-tier && ls -r
 
     - name: Terraform Init
-      run: terraform init -backend-config='config.tf'
+     working-directory: ./src/free-tier
+      run: terraform init -backend-config=backend/config.tf'
 
     - name: Terraform Plan
+      working-directory: ./src/free-tier
       run: terraform plan -out=tfplan
 
     - name: Terraform Apply
+      working-directory: ./src/free-tier
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: terraform apply -auto-approve
