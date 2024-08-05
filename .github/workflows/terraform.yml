@@ -33,14 +33,12 @@ jobs:
     - name: Change directory to src/free-tier
       run: cd src/free-tier && ls -r
 
-    - name: Set custom Terraform CLI path (optional)
-      run: echo "TERRAFORM_CLI_PATH" >> $GITHUB_ENV
 
-    - name: Set custom Terraform CLI path (optional)
-      run: echo $GITHUB_ENV
 
     #- name: Move config.tf file
     #  run: mv src/free-tier/config.tf /desired/destination/path/
+    - name: List Terraform CLI path
+      run: echo $TERRAFORM_CLI_PATH
 
     - name: Terraform Init
       run: terraform init -backend-config=backend/config.tf'
