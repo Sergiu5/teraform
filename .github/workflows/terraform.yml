@@ -35,8 +35,8 @@ jobs:
     
 
     - name: List files for debugging
-      run: ls -R
-      
+      run: ls -d $TERRAFORM_CLI_PATH
+
     - name: Terraform Init
       run: terraform init -backend-config=config.tf
 
