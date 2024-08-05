@@ -33,15 +33,15 @@ jobs:
     - name: Change directory to src/free-tier
       run: cd src/free-tier && ls -r
 
-
-
-    #- name: Move config.tf file
-    #  run: mv src/free-tier/config.tf /desired/destination/path/
     - name: List Terraform CLI path
       run: echo $TERRAFORM_CLI_PATH
 
+    - name: Move config.tf file
+      run: mv src/free-tier/config.tf $TERRAFORM_CLI_PATH
+    
+
     - name: Terraform Init
-      run: terraform init -backend-config=backend/config.tf'
+      run: terraform init -backend-config=config.tf
 
     - name: Terraform Plan
       run: terraform plan -out=tfplan
