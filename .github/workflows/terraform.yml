@@ -31,7 +31,7 @@ jobs:
       working-directory: ./src/free-tier
 
     - name: Terraform Init
-      run: terraform init -backend-config=src/free-tier/backend/config.tf
+      run: terraform init -backend-config=backend/config.tf
 
     - name: Terraform Plan
       run: terraform plan -out=tfplan
