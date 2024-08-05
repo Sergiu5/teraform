@@ -27,12 +27,6 @@ jobs:
         #role-to-assume: arn:aws:iam::351840223119:instance-profile/TerraformRole2
         aws-region: us-east-1  # Reemplaza con tu región de AWS
 
-    - name: List files for debugging
-      run: ls -R
-
-    - name: Change directory to src/free-tier
-      run: cd src/free-tier && ls -r
-
     - name: List Terraform CLI path
       run: echo $TERRAFORM_CLI_PATH
 
@@ -40,6 +34,9 @@ jobs:
       run: mv src/free-tier/config.tf $TERRAFORM_CLI_PATH
     
 
+    - name: List files for debugging
+      run: ls -R
+      
     - name: Terraform Init
       run: terraform init -backend-config=config.tf
 
