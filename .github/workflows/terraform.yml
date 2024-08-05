@@ -30,6 +30,9 @@ jobs:
     - name: List files for debugging
       run: ls -R
 
+    - name: Change directory to src/free-tier
+      working-directory: ./src/free-tier
+
     - name: Terraform Init
       run: terraform init -backend-config=backend/config.tf
 
