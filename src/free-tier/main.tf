@@ -8,7 +8,13 @@ provider "aws" {
 }
 
 terraform {
-  backend "s3" {}
+  backend "s3" {
+    bucket         = "pruebaterraformsm"
+    key            = "terraform.tfstate"
+    region         = "us-east-1"
+    profile        = "terraform"    
+  }
+  
 }
 
 module "vpc" {
