@@ -7,7 +7,7 @@ resource "aws_instance" "ec2" {
   subnet_id                   = var.public_subnet_id
   vpc_security_group_ids      = [aws_security_group.ec2_security_group.id]
   associate_public_ip_address = true
-
+  iam_instance_profile        = "TerraformRole2"
   key_name                    = aws_key_pair.ec2_key_pair.key_name
 
   tags = {
